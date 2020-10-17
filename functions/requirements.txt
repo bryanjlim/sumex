@@ -4,3 +4,4 @@ azure-functions
 numpy
 networkx
 nltk
+sumy
