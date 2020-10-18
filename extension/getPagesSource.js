@@ -20,7 +20,13 @@ async function DOMtoString(document_root) {
         }
         console.log(blob)
         const res = await summarizer(blob)
-        res1 = res
+        res0 = res.substr(0, 2);
+        console.log(res0)
+        if(res0 === "b'"){
+            res1 = res.substr(2, res.length - 3)
+        } else{
+            res1 = res
+        }
         console.log(res1)
         var div = document.createElement('div')
         div.classList.add('summ')
@@ -29,10 +35,9 @@ async function DOMtoString(document_root) {
         var headnode = document.createTextNode("Here's a summarized version of this page!");
         header.appendChild(headnode);
         var p = document.createElement("p");
-        var pnode = document.createTextNode(res1)
-        p.appendChild(pnode)
+        p.innerHTML = res1
         var butClose = document.createElement("button")
-        var bnode = document.createTextNode("x")
+        var bnode = document.createTextNode("close")
         console.log(document_root.getElementsByClassName("summ"))
         butClose.onclick = function(){document.getElementsByClassName("summ")[0].remove()}
         butClose.appendChild(bnode)
@@ -73,5 +78,5 @@ chrome.runtime.sendMessage({
     // action: "getSource",
     source: DOMtoString(document)
 });
-
+// b'
 
