@@ -1,4 +1,4 @@
-function DOMtoString(document_root) {
+async function DOMtoString(document_root) {
     var checkExist = document_root.getElementsByClassName('summ')
     if(checkExist[0] != undefined){
         checkExist[0].remove()
@@ -14,6 +14,7 @@ function DOMtoString(document_root) {
             }
             console.log(blob)
             const res = await summarizer(blob)
+            console.log(res)
             var div = document.createElement('div')
             div.classList.add('summ')
             var header = document.createElement("h1");
@@ -54,7 +55,7 @@ async function summarizer(text) {
         },
         body: text
     });
-    return response.body; // parses JSON response into native JavaScript objects
+    return response.text(); // parses JSON response into native JavaScript objects
 }
 
 chrome.runtime.sendMessage({
