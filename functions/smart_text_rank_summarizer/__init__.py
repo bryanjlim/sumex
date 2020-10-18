@@ -19,7 +19,7 @@ import re
 
 
 LANGUAGE = "english"
-SENTENCES_COUNT = 1
+
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     ret = ""
@@ -28,6 +28,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     soup = BeautifulSoup(text, features="lxml")
     souped = soup.get_text()
+
+    SENTENCES_COUNT = math.log2(souped.count('.'))
     
     parser = PlaintextParser.from_string(souped, Tokenizer(LANGUAGE))
     stemmer = Stemmer(LANGUAGE)
