@@ -17,6 +17,7 @@ from bs4 import BeautifulSoup
 import azure.functions as func
 import logging
 import re
+import math
 
 LANGUAGE = "english"
 
