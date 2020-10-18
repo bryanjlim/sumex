@@ -16,6 +16,7 @@ from bs4 import BeautifulSoup
 import azure.functions as func
 import logging
 
+
 LANGUAGE = "english"
 SENTENCES_COUNT = 1
 

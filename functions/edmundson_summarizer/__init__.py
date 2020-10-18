@@ -13,6 +13,8 @@ from bs4 import BeautifulSoup
 
 import azure.functions as func
 import logging
+import nltk
+nltk.download('punkt', download_dir='')
 
 LANGUAGE = "english"
 SENTENCES_COUNT = 1
