@@ -13,7 +13,7 @@ function DOMtoString(document_root) {
                 blob = blob + paragraphs[i].innerHTML
             }
             console.log(blob)
-            // const res = await summarizer(blob)
+            const res = await summarizer(blob)
             var div = document.createElement('div')
             div.classList.add('summ')
             var header = document.createElement("h1");
@@ -21,7 +21,7 @@ function DOMtoString(document_root) {
             var headnode = document.createTextNode("Here's a summarized version of this page!");
             header.appendChild(headnode);
             var p = document.createElement("p");
-            var pnode = document.createTextNode("This is new.")
+            var pnode = document.createTextNode(res)
             p.appendChild(pnode)
             var butClose = document.createElement("button")
             var bnode = document.createTextNode("x")
