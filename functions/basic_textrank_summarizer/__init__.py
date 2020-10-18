@@ -69,7 +69,11 @@ def generate_summary(sentences):
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
     text = str(req.get_body())
-    sentences = text.split(". ")
+
+    soup = BeautifulSoup(text, features="lxml")
+    souped = soup.get_text()
+
+    sentences = souped.split(". ")
     ret = " ".join(generate_summary(sentences)) if len(sentences) > 3 else text
     return func.HttpResponse(ret)
 
