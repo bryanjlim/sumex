@@ -1,11 +1,11 @@
 async function DOMtoString(document_root) {
     let tag = "p"
-    if (document.URL.toLowerCase().includes("mail.google.com")) {
-        tag = "span"
+    // if (document.URL.toLowerCase().includes("mail.google.com")) {
+    //     tag = "span"
 
-    } else{
-        tag = "p"
-    }
+    // } else{
+    //     tag = "p"
+    // }
     console.log(tag)
     var checkExist = document_root.getElementsByClassName('summ')
     if(checkExist[0] != undefined){
