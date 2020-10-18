@@ -9,7 +9,7 @@
     "default_icon": "icon.png",
     "default_popup": "popup.html"
   },
-  "permissions": ["activeTab", "<all_urls>"],
+  "permissions": ["activeTab", "<all_urls>","contextMenus"],
 
   "background": {
     "scripts": ["popup.js"]
