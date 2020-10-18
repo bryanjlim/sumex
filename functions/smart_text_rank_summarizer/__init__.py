@@ -16,6 +16,7 @@ from bs4 import BeautifulSoup
 import azure.functions as func
 import logging
 import re
+import math
 
 
 LANGUAGE = "english"
@@ -29,7 +30,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     soup = BeautifulSoup(text, features="lxml")
     souped = soup.get_text()
 
-    SENTENCES_COUNT = math.log2(souped.count('.'))
+    SENTENCES_COUNT = int(math.log(souped.count('.'), 4))
     
     parser = PlaintextParser.from_string(souped, Tokenizer(LANGUAGE))
     stemmer = Stemmer(LANGUAGE)
@@ -37,7 +38,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     summarizer = TextRankSummarizer(stemmer)
     summarizer.stop_words = get_stop_words(LANGUAGE)
 
-    for sentence in summarizer(parser.document, SENTENCES_COUNT):
+    for sentence in summarizer(parser.document, max(SENTENCES_COUNT, 2)):
         ret += str(sentence)
     
     return func.HttpResponse(re.sub(r'\\\w{3}','',ret))

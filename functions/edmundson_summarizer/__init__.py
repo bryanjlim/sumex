@@ -19,12 +19,9 @@ import logging
 import re
 
 LANGUAGE = "english"
-<<<<<<< HEAD
 
 ret = ""
-=======
 SENTENCES_COUNT = 1
->>>>>>> 467796af7d97b7f5291d926c85b8e621569acf1c
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     ret = ""
