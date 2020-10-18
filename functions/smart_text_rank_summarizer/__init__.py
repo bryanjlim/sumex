@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 import nltk
-nltk.download('punkt', download_dir='')
+nltk.download('punkt', download_dir='.')
 
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
@@ -15,6 +15,7 @@ from bs4 import BeautifulSoup
 
 import azure.functions as func
 import logging
+import re
 
 
 LANGUAGE = "english"
@@ -31,11 +32,11 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     parser = PlaintextParser.from_string(souped, Tokenizer(LANGUAGE))
     stemmer = Stemmer(LANGUAGE)
 
-    summarizer = Summarizer(stemmer)
+    summarizer = TextRankSummarizer(stemmer)
     summarizer.stop_words = get_stop_words(LANGUAGE)
 
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
         ret += str(sentence)
     
-    return func.HttpResponse(ret)
+    return func.HttpResponse(re.sub(r'\\\w{3}','',ret))
 

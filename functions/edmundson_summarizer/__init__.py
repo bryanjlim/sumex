@@ -2,6 +2,9 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
+import nltk
+nltk.download('punkt', download_dir='.')
+
 from sumy.parsers.html import HtmlParser
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
@@ -13,14 +16,13 @@ from bs4 import BeautifulSoup
 
 import azure.functions as func
 import logging
-import nltk
-nltk.download('punkt', download_dir='')
+import re
 
 LANGUAGE = "english"
 SENTENCES_COUNT = 1
-ret = ""
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
+    ret = ""
     logging.info('Python HTTP trigger function processed a request.')
     text = str(req.get_body())
 
@@ -36,5 +38,5 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
         ret+=str(sentence)
     
-    return func.HttpResponse(ret)
+    return func.HttpResponse(re.sub(r'\\\w{3}','',ret))
 
