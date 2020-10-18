@@ -16,7 +16,7 @@ import logging
 
 LANGUAGE = "english"
 SENTENCES_COUNT = 1
-ret = []
+ret = ""
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
@@ -32,7 +32,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     summarizer.stop_words = get_stop_words(LANGUAGE)
 
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
-        ret.append(sentence)
+        ret+=str(sentence)
     
     return func.HttpResponse("".join(ret))
 
