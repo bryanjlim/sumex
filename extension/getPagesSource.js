@@ -23,18 +23,15 @@ function DOMtoString(document_root) {
             var p = document.createElement("p");
             var pnode = document.createTextNode("This is new.")
             p.appendChild(pnode)
-            // var butClose = document.createElement("button")
-            // var bnode = document.createTextNode("x")
-            // butClose.onclick = document_root.getElementsByClassName('summ')[0].remove()
-            // butClose.appendChild(bnode)
+            var butClose = document.createElement("button")
+            var bnode = document.createTextNode("x")
+            console.log(document_root.getElementsByClassName("summ"))
+            butClose.onclick = function(){document.getElementsByClassName("summ")[0].remove()}
+            butClose.appendChild(bnode)
             div.appendChild(header)
             div.appendChild(p)
-            // div.appendChild(butClose)
-            // div.onclick = document_root.getElementsByClassName('summ')[0].remove()
-            // document_root.body.insertBefore(header, document_root.body.firstChild);
+            div.appendChild(butClose)
             document_root.body.insertBefore(div, document_root.body.firstChild);
-            
-            checkPageButton.innerHTML="Close"
             return { found: true, val: paragraphs };
             
         } else{
