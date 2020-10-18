@@ -14,6 +14,11 @@ header, .full-width {
     width: 100%;
     background: #535df1;
 }
+
+@font-face {
+  font-family: ComfortaaBold;
+  src: url(Comfortaa-Bold.ttf);
+}
   
 h2, .full-width-borders {
     /* add in section padding (1.5rem) */
