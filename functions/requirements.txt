@@ -5,3 +5,4 @@ numpy
 networkx
 nltk
 sumy
+bs4

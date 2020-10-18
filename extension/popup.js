@@ -25,3 +25,9 @@ document.addEventListener(
   },
   false
 );
+
+chrome.contextMenus.create({
+  title: "Summarize with Sumex",
+  contexts:["selection"],  // ContextType
+  onclick: searchUrbanDict // A callback function
+ });

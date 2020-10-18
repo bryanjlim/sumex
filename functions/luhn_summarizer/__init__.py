@@ -2,7 +2,9 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-from sumy.parsers.html import HtmlParser
+import nltk
+nltk.download('punkt', download_dir='')
+
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.luhn import LuhnSummarizer as Summarizer
@@ -16,9 +18,9 @@ import logging
 
 LANGUAGE = "english"
 SENTENCES_COUNT = 1
-ret = ""
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
+    ret = ""
     logging.info('Python HTTP trigger function processed a request.')
     text = str(req.get_body())
 
@@ -32,7 +34,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     summarizer.stop_words = get_stop_words(LANGUAGE)
 
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
-        ret+=str(sentence)
+        ret += str(sentence)
     
     return func.HttpResponse(ret)
 
