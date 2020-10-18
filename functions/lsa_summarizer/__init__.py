@@ -18,7 +18,6 @@ import nltk
 nltk.download('punkt', download_dir='')
 
 LANGUAGE = "english"
-SENTENCES_COUNT = 1
 ret = ""
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -27,7 +26,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     soup = BeautifulSoup(text, features="lxml")
     souped = soup.get_text()
-    
+
+    SENTENCES_COUNT = math.log2(souped.count('.'))
+
     parser = PlaintextParser.from_string(souped, Tokenizer(LANGUAGE))
     stemmer = Stemmer(LANGUAGE)
 
