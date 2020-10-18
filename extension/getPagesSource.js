@@ -59,6 +59,7 @@ async function DOMtoString(document_root) {
             div.classList.add('summ')
             var header = document.createElement("h1");
             header.classList.add('summHeader')
+            header.style.color = '#535df1'
             var headnode = document.createTextNode("Here's a summarized version of this page!");
             header.appendChild(headnode);
             var p = document.createElement("p");
@@ -68,9 +69,20 @@ async function DOMtoString(document_root) {
             console.log(document_root.getElementsByClassName("summ"))
             butClose.onclick = function () { document.getElementsByClassName("summ")[0].remove() }
             butClose.appendChild(bnode)
+            butClose.style.backgroundColor = "#535df1"
+            butClose.style.border = 'none'
+            butClose.style.padding = '15px 32px'
+            butClose.style.textAlign = 'center'
+            butClose.style.textDecoration = 'none'
+            butClose.style.display = 'inline-block'
+            butClose.style.fontSize = '16px'
+            butClose.style.margin = '4px 2px'
+            butClose.style.cursor = 'pointer'
             div.appendChild(header)
             div.appendChild(p)
             div.appendChild(butClose)
+            div.style.padding = '20px';
+            div.style.paddingTop = '100px';
             document_root.body.insertBefore(div, document_root.body.firstChild);
             return { found: true, val: paragraphs };
         } else {
