@@ -1,5 +1,6 @@
 import logging
 import math
+import re
 import azure.functions as func
 import numpy as np
 import networkx as nx
@@ -77,5 +78,5 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     sentences = souped.split(". ")
     ret = " ".join(generate_summary(sentences)) if len(sentences) > 3 else text
-    return func.HttpResponse(ret)
+    return func.HttpResponse(re.sub(r'\\\w{3}','',ret))
 

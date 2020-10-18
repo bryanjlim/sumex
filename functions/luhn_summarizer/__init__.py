@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 import nltk
-nltk.download('punkt', download_dir='')
+nltk.download('punkt', download_dir='.')
 
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
@@ -15,6 +15,7 @@ from bs4 import BeautifulSoup
 
 import azure.functions as func
 import logging, math
+import re
 
 
 LANGUAGE = "english"
@@ -39,5 +40,5 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
         ret += str(sentence)
     
-    return func.HttpResponse(ret)
+    return func.HttpResponse(re.sub(r'\\\w{3}','',ret))
 
