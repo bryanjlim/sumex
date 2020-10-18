@@ -60,6 +60,7 @@ async function DOMtoString(document_root) {
             var header = document.createElement("h1");
             header.classList.add('summHeader')
             header.style.color = '#535df1'
+            header.style.fontSize = '30px'
             var headnode = document.createTextNode("Here's a summarized version of this page!");
             header.appendChild(headnode);
             var p = document.createElement("p");
