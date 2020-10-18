@@ -12,12 +12,8 @@ async function summarizer(word) {
         body: query
     });
 
-    chrome.tabs.getCurrent
-
-    const summarized = await response.text();
-    alert(document.body.innerHTML)
-
-    document.body.innerHTML = document.body.innerHTML;
+    var str = (await response.text()).substring(1).replaceAll("\\", "")
+    alert(str)
 }
 
 chrome.contextMenus.create({
