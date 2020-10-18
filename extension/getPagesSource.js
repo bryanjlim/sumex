@@ -6,55 +6,79 @@ async function DOMtoString(document_root) {
     // } else{
     //     tag = "p"
     // }
-    console.log(tag)
     var checkExist = document_root.getElementsByClassName('summ')
-    if(checkExist[0] != undefined){
+    if (checkExist[0] != undefined) {
         checkExist[0].remove()
-    } 
-    var paragraphs = document_root.getElementsByTagName(tag);
-    if (typeof paragraphs != undefined) {
-        var blob = ''
-        for(var i = 0; i < paragraphs.length; i++)
-        {
-            blob = blob + paragraphs[i].innerHTML
-        }
-        console.log(blob)
-        const res = await summarizer(blob)
-        res0 = res.substr(0, 2);
-        console.log(res0)
-        if(res0 === "b'"){
-            res1 = res.substr(2, res.length - 3)
-        } else{
-            res1 = res
-        }
-        res1 = res1.replaceAll('\\n', '')
-        res1 = res1.replaceAll('\\', '')
-        console.log(res1)
-        var div = document.createElement('div')
-        div.classList.add('summ')
-        var header = document.createElement("h1");
-        header.classList.add('summHeader')
-        var headnode = document.createTextNode("Here's a summarized version of this page!");
-        header.appendChild(headnode);
-        var p = document.createElement("p");
-        p.innerHTML = res1
-        var butClose = document.createElement("button")
-        var bnode = document.createTextNode("close")
-        console.log(document_root.getElementsByClassName("summ"))
-        butClose.onclick = function(){document.getElementsByClassName("summ")[0].remove()}
-        butClose.appendChild(bnode)
-        div.appendChild(header)
-        div.appendChild(p)
-        div.appendChild(butClose)
-        document_root.body.insertBefore(div, document_root.body.firstChild);
-        return { found: true, val: paragraphs };
-        
-    } else{
-        alert('oopsies no p tag')
     }
 
+
+    if (document.URL.includes("mail.google.com") && document.URL.includes("inbox/")) {
+        var list = document.querySelectorAll('[role="listitem"]');
+        if (list.length > 0) {
+            let funcs = []
+            for (var j = 0; j < list.length; j++) {
+                const item = list[j];
+                var pElements = item.getElementsByTagName("div")
+                var str = ""
+                if (pElements != undefined) {
+                    for (var i = 0; i < pElements.length; i++) {
+                        if (!pElements[i].id) {
+                            str = str + pElements[i].innerHTML
+                        }
+                    }
+                }
+                funcs.push(summarizer(str))
+            }
+            let rets = Promise.all(funcs)
+            let retStr = ""
+            for (var i = 0; i < rets.length; i++) {
+                retStr += rets[i];
+                retStr += "\n" + "-------------------------------------------" + "\n"
+            }
+            return { found: true, val: retStr };
+        }
+    } else {
+        var paragraphs = document_root.getElementsByTagName(tag);
+        if (typeof paragraphs != undefined) {
+            var blob = ''
+            for (var i = 0; i < paragraphs.length; i++) {
+                blob = blob + paragraphs[i].innerHTML
+            }
+            const res = await summarizer(blob)
+            res0 = res.substr(0, 2);
+            console.log(res0)
+            if (res0 === "b'") {
+                res1 = res.substr(2, res.length - 3)
+            } else {
+                res1 = res
+            }
+            res1 = res1.replaceAll('\\n', '')
+            res1 = res1.replaceAll('\\', '')
+            console.log(res1)
+            var div = document.createElement('div')
+            div.classList.add('summ')
+            var header = document.createElement("h1");
+            header.classList.add('summHeader')
+            var headnode = document.createTextNode("Here's a summarized version of this page!");
+            header.appendChild(headnode);
+            var p = document.createElement("p");
+            p.innerHTML = res1
+            var butClose = document.createElement("button")
+            var bnode = document.createTextNode("close")
+            console.log(document_root.getElementsByClassName("summ"))
+            butClose.onclick = function () { document.getElementsByClassName("summ")[0].remove() }
+            butClose.appendChild(bnode)
+            div.appendChild(header)
+            div.appendChild(p)
+            div.appendChild(butClose)
+            document_root.body.insertBefore(div, document_root.body.firstChild);
+            return { found: true, val: paragraphs };
+        } else {
+            alert('Error: No valid text found')
+        }
+    }
 }
-    
+
 
 
 // luhn - https://basic-text-summarizer.azurewebsites.net/api/luhn_summarizer?code=bY17WaICfJUDfbqOWcM0lXcIU2BVWhjT0a1vs7PAqk6Zk11NJggm/A==
