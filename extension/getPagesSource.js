@@ -70,7 +70,7 @@ async function summarizer(text) {
 }
 
 chrome.runtime.sendMessage({
-    action: "getSource",
+    // action: "getSource",
     source: DOMtoString(document)
 });
 
