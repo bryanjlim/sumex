@@ -27,6 +27,8 @@ async function DOMtoString(document_root) {
         } else{
             res1 = res
         }
+        res1 = res1.replaceAll('\\n', '')
+        res1 = res1.replaceAll('\\', '')
         console.log(res1)
         var div = document.createElement('div')
         div.classList.add('summ')
