@@ -12,6 +12,6 @@
   "permissions": ["activeTab", "<all_urls>","contextMenus"],
 
   "background": {
-    "scripts": ["popup.js"]
+    "scripts": ["popup.js", "rightclick.js"]
   }
 }
