@@ -87,11 +87,7 @@ async function DOMtoString(document_root) {
 // edmundson - https://basic-text-summarizer.azurewebsites.net/api/edmundson_summarizer?code=DiDWZbUFgtEl7SZ0jCPaKWI95JSJY72lIxv53vya7TEDzfHScLfjaw==
 async function summarizer(text) {
     // Default options are marked with *
-<<<<<<< HEAD
     url = 'https://basic-text-summarizer.azurewebsites.net/api/smart_text_rank_summarizer?code=tNJjuxJXeHz/TtJvXlQ3Vv5qfQC2ZAfwki/XshYwUPI5U4r1wnQIOA=='
-=======
-    url = 'https://basic-text-summarizer.azurewebsites.net/api/basic_textrank_summarizer?code=vTb0P/llWsXcTiqclPcjR6PtN4wbOFMXtiZwUIaj0uUBTJX8i0WxYw=='
->>>>>>> 947ae23e1d05f071695a913bd28cc3b45ae8ceb7
     const response = await fetch(url, {
         method: 'POST',
         cache: 'no-cache',
