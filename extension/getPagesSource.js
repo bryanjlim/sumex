@@ -14,7 +14,8 @@ async function DOMtoString(document_root) {
             }
             console.log(blob)
             const res = await summarizer(blob)
-            console.log(res)
+            res1 = res
+            console.log(res1)
             var div = document.createElement('div')
             div.classList.add('summ')
             var header = document.createElement("h1");
@@ -22,7 +23,7 @@ async function DOMtoString(document_root) {
             var headnode = document.createTextNode("Here's a summarized version of this page!");
             header.appendChild(headnode);
             var p = document.createElement("p");
-            var pnode = document.createTextNode(res)
+            var pnode = document.createTextNode(res1)
             p.appendChild(pnode)
             var butClose = document.createElement("button")
             var bnode = document.createTextNode("x")
@@ -43,13 +44,17 @@ async function DOMtoString(document_root) {
     
 
 }
-
+// luhn - https://basic-text-summarizer.azurewebsites.net/api/luhn_summarizer?code=bY17WaICfJUDfbqOWcM0lXcIU2BVWhjT0a1vs7PAqk6Zk11NJggm/A==
+// basic - https://basic-text-summarizer.azurewebsites.net/api/basic_textrank_summarizer?code=vTb0P/llWsXcTiqclPcjR6PtN4wbOFMXtiZwUIaj0uUBTJX8i0WxYw==
+// lsa - https://basic-text-summarizer.azurewebsites.net/api/lsa_summarizer?code=r/qBCL/Mpf85ZHLgF3htSaZC7IXNdhIUiRye79fILJ/qqoaIh6qQ8g==
+// edmundson - https://basic-text-summarizer.azurewebsites.net/api/edmundson_summarizer?code=DiDWZbUFgtEl7SZ0jCPaKWI95JSJY72lIxv53vya7TEDzfHScLfjaw==
 async function summarizer(text) {
     // Default options are marked with *
     url = 'https://basic-text-summarizer.azurewebsites.net/api/basic_textrank_summarizer?code=vTb0P/llWsXcTiqclPcjR6PtN4wbOFMXtiZwUIaj0uUBTJX8i0WxYw=='
     const response = await fetch(url, {
         method: 'POST',
         cache: 'no-cache',
+        mode: 'cors',
         headers: {
             'Content-Type': 'application/json'
         },
