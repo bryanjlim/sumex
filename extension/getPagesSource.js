@@ -35,6 +35,7 @@ async function DOMtoString(document_root) {
         var header = document.createElement("h1");
         header.classList.add('summHeader')
         var headnode = document.createTextNode("Here's a summarized version of this page!");
+        header.style.color = '#535df1'
         header.appendChild(headnode);
         var p = document.createElement("p");
         p.innerHTML = res1
@@ -43,9 +44,20 @@ async function DOMtoString(document_root) {
         console.log(document_root.getElementsByClassName("summ"))
         butClose.onclick = function(){document.getElementsByClassName("summ")[0].remove()}
         butClose.appendChild(bnode)
+        butClose.style.backgroundColor = "#535df1"
+        butClose.style.border = 'none'
+        butClose.style.padding = '15px 32px'
+        butClose.style.textAlign = 'center'
+        butClose.style.textDecoration = 'none'
+        butClose.style.display = 'inline-block'
+        butClose.style.fontSize = '16px'
+        butClose.style.margin = '4px 2px'
+        butClose.style.cursor = 'pointer'
         div.appendChild(header)
         div.appendChild(p)
         div.appendChild(butClose)
+        div.style.padding = '20px';
+        div.style.paddingTop = '100px';
         document_root.body.insertBefore(div, document_root.body.firstChild);
         return { found: true, val: paragraphs };
         
@@ -63,7 +75,7 @@ async function DOMtoString(document_root) {
 // edmundson - https://basic-text-summarizer.azurewebsites.net/api/edmundson_summarizer?code=DiDWZbUFgtEl7SZ0jCPaKWI95JSJY72lIxv53vya7TEDzfHScLfjaw==
 async function summarizer(text) {
     // Default options are marked with *
-    url = 'https://basic-text-summarizer.azurewebsites.net/api/basic_textrank_summarizer?code=vTb0P/llWsXcTiqclPcjR6PtN4wbOFMXtiZwUIaj0uUBTJX8i0WxYw=='
+    url = 'https://basic-text-summarizer.azurewebsites.net/api/edmundson_summarizer?code=DiDWZbUFgtEl7SZ0jCPaKWI95JSJY72lIxv53vya7TEDzfHScLfjaw=='
     const response = await fetch(url, {
         method: 'POST',
         cache: 'no-cache',
