@@ -13,10 +13,6 @@ async function summarizer(word) {
     });
 
     var str = (await response.text()).substring(1).replaceAll("\\", "")
-    var msg = new SpeechSynthesisUtterance();
-    msg.text = str;
-    msg.volume = .3;
-    window.speechSynthesis.speak(msg)
     alert(str)
 }
 
